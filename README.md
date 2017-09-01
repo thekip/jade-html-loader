@@ -113,6 +113,35 @@ You can use `require()` in jade templates to utilize webpack functionality.
 Don't forget to polyfill `require()` if you want to use it.
 See [enhanced-require](https://github.com/webpack/enhanced-require) documentation.
 
+
+### How to use locals:
+
+inside your webpack config file:
+
+```javascript
+module.exports = {
+    module: {
+        loaders: {
+        // here is as usual
+         { test: /\.jade$/,  loader: 'raw-loader!jade-html-loader' },
+        }
+    },
+    jadeLoader: {
+    //here you can set any of compiler options, and locals as well
+     locals: {
+      bem: require('bem-jade')({
+        prefix: '',
+        element: '__',
+        modifier: '--',
+        default_tag: 'div',
+      })
+    },
+
+    basedir: __dirname + '/src'
+    }
+}
+```
+
 ## License
 
 MIT (http://www.opensource.org/licenses/mit-license.php)
